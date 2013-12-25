@@ -1,7 +1,8 @@
 //Set up our Variables
 var wTile = 24,
 	hTile = 24,
-	TILE = 16,
+	TILE_WIDTH = 16,
+	TILE_HEIGHT = 16,
 	gameWidth = wTile * TILE,
 	gameHeight = hTile * TILE;
 
@@ -19,7 +20,9 @@ var bgCanvas = document.getElementById('bgCanvas'),
 var playerCanvas = document.getElementById('playerCanvas'),
 	playerCtx = playerCanvas.getContext('2d');	
 
-//Add listeners and stuff
+//Code runs 1 time when the page loads.
+//Use to add listeners and to draw the background
+
 function run(images) {
 	document.addEventListener('keydown', checkKeyDown, false);
 	document.addEventListener('keyup', checkKeyUp, false);
@@ -27,6 +30,9 @@ function run(images) {
 	bgCtx.drawImage(loadedImages.bg, 0, 0, gameWidth, gameHeight);
 	startLoop();
 }
+
+//Actual game code
+var GRAVITY = .1;
 
 var player = new PlayerObj(0, 0, 16, 16);
 

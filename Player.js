@@ -26,5 +26,9 @@ PlayerObj.prototype.update = function() {
 }
 
 PlayerObj.prototype.physics = function() {
+	//Update the postion of PlayerObj
 	this.x += this.vx;
+	this.y += this.vy;
+
+	this.vy += GRAVITY;
 }
