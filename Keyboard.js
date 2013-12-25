@@ -10,8 +10,7 @@ function checkKeyDown(e) {
 
 	//W
 	if (keyId === UP) {
-		
-		e.preventdefault();
+		;
 	}
 
 	//D
@@ -21,8 +20,7 @@ function checkKeyDown(e) {
 
 	//A
 	if (keyId === LEFT) {
-		
-		e.preventdefault();
+		;
 	}
 
 }
