@@ -1,8 +1,8 @@
 //Set up our Variables
-var wTile = 24,
-	hTile = 24,
-	TILE_WIDTH = 16,
-	TILE_HEIGHT = 16,
+var wTile = 10,
+	hTile = 10,
+	TILE_WIDTH = 32,
+	TILE_HEIGHT = 32,
 	gameWidth = wTile * TILE_WIDTH,
 	gameHeight = hTile * TILE_HEIGHT;
 
@@ -31,6 +31,20 @@ function run(images) {
 	startLoop();
 }
 
+//Map Code
+
+var MAP = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 1,  
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+			1, 1, 1, 1, 1, 1, 1, 1, 1, 1,	
+			]
+
 //Actual game code
 var GRAVITY = .1;
 
@@ -40,6 +54,13 @@ var player = new PlayerObj(0, 0, 16, 16);
 //Any code in here will be run over and over again.
 function main() {
 	player.update();
+	for (var i = 0; i < MAP.length; i++) {
+		var tile = new Tile(MAP[i]);
+		var x = i % 10;
+		var y = Math.floor(i / 10);
+		tile.setLocation(x, y);
+		tile.draw();
+	}
 }
 
 loadResources(IMAGES, run);
