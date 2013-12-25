@@ -24,7 +24,7 @@ function run(images) {
 	document.addEventListener('keydown', checkKeyDown, false);
 	document.addEventListener('keyup', checkKeyUp, false);
 	loadedImages = images;
-	//bgCtx.drawImage(loadedImages.bg, 0, 0, gameWidth, gameHeight);
+	bgCtx.drawImage(loadedImages.bg, 0, 0, gameWidth, gameHeight);
 	startLoop();
 }
 
