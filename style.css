@@ -1,0 +1,18 @@
+body {
+	position: absolute; 
+	padding:0; 
+	margin:0; 
+	height: 100%; 
+	width:100%; 
+	background-color: #303030;
+}
+
+#bgCanvas {
+	display:block;
+	margin: auto;
+}
+
+#playerCanvas {
+	display: block;
+	margin: -384px auto 0px;
+}
