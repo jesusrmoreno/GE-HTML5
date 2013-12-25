@@ -6,7 +6,9 @@ function PlayerObj(x, y, width, height) {
 	this.y = y;
 	this.height = height;
 	this.width = width;
-	this.speed = .2;
+	this.x2 = x + width;
+	this.y2 = y + height;
+	this.speed = 1;
 	this.vx = 0;
 	this.vy = 0;
 }
@@ -14,6 +16,10 @@ function PlayerObj(x, y, width, height) {
 //Our draw function. Takes a sprite
 PlayerObj.prototype.draw = function(sprite) {	
 	playerCtx.clearRect(0, 0, 400, 400);
+	
+	playerCtx.fillStyle = "#000000"
+	playerCtx.fillText(player.x + "," + player.y, player.x, player.y - 2);
+
 	playerCtx.fillStyle = "#FFFF00";
 	playerCtx.fillRect(this.x, this.y, this.width, this.height);
 
@@ -30,5 +36,18 @@ PlayerObj.prototype.physics = function() {
 	this.x += this.vx;
 	this.y += this.vy;
 
-	this.vy += GRAVITY;
+	if (((this.x % TILE_WIDTH) != 0) && (LASTKEY === LEFT)) {
+		player.x = Math.floor(player.x);
+		player.x += -1;
+	}
+
+	if (((this.x % TILE_WIDTH) != 0) && (LASTKEY === RIGHT)) {
+		player.x = Math.floor(player.x);
+		player.x += 1;
+	}
+
+}
+
+function checkCollision(obj1, obj2) {
+
 }
