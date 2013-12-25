@@ -3,8 +3,8 @@ var wTile = 24,
 	hTile = 24,
 	TILE_WIDTH = 16,
 	TILE_HEIGHT = 16,
-	gameWidth = wTile * TILE,
-	gameHeight = hTile * TILE;
+	gameWidth = wTile * TILE_WIDTH,
+	gameHeight = hTile * TILE_HEIGHT;
 
 //Resource(Images for now) Variables	
 var	IMAGES = ['player_sheet', 'bg'],
