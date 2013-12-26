@@ -15,6 +15,7 @@ Tile.prototype.setLocation = function(x, y) {
 
 Tile.prototype.draw = function(type) {
 	if (this.type === 1) {
+		bgCtx.fillStyle = "#000000";
 		bgCtx.fillRect(this.x, this.y, TILE_WIDTH, TILE_HEIGHT);
 	}
 }

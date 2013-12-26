@@ -18,14 +18,8 @@ function PlayerObj(x, y, width, height) {
 //Our draw function. Takes a sprite
 PlayerObj.prototype.draw = function(sprite) {	
 	playerCtx.clearRect(0, 0, 400, 400);
-	
-	playerCtx.fillStyle = "#000000"
-	playerCtx.fillText(player.x + "," + player.y, player.x, player.y - 2);
-	playerCtx.fillText(player.maxX + "," + player.maxY, player.x, player.y - 12);
-
-	playerCtx.fillStyle = "#FFFF00";
+	playerCtx.fillStyle = "#003b6f";
 	playerCtx.fillRect(this.x, this.y, this.width, this.height);
-
 }
 
 //The Update function of our player. eg: The Brains.
@@ -56,6 +50,7 @@ PlayerObj.prototype.physics = function() {
 
 	if (player.falling === true) {
 		player.vy += GRAVITY;
+
 	} else {
 		if ((player.y % TILE_WIDTH) != 0) {
 			player.y -= 1;
@@ -69,14 +64,15 @@ PlayerObj.prototype.physics = function() {
 
 function checkCollision(a, b) {
 
-	b.maxX = b.x + 16;
-	b.maxY = b.y + 16; 
+	b.maxX = b.x + TILE_WIDTH;
+	b.maxY = b.y + TILE_HEIGHT; 
+	
 	if (b.type === 1) {
-		if (!((a.maxY < b.y) || (a.y > b.maxY))) {
-			if (!((a.maxX > b.x) || (a.minX < b.maxX))) {
-				a.falling = false;
-				a.jumping = false;
-				a.vy = 0;
+		if ((a.maxY + 1 > b.y) && (a.y < b.y) && (player.vy > 0)) {
+			if ((!((a.maxX <= b.x) && (a.x < b.x))) && (!((a.maxX > b.maxX) && (a.x >= b.maxX)))){
+				player.falling = false;
+				player.jumping = false;
+				player.vy = 0;
 			}
 		}
 	}
