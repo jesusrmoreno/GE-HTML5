@@ -9,18 +9,20 @@ function checkKeyDown(e) {
 	var keyId = e.keyCode || e.which;
 
 	//W
-	if (keyId === UP) {
-		;
+	if ((keyId === UP) && (player.jumping === false)) {
+		player.falling = true;
+		player.vy += -GRAVITY * 20;
+		player.jumping = true;
 	}
 
 	//D
-	if (keyId === RIGHT) {
+	if (keyId === RIGHT){
 		player.vx += player.speed;
 		LASTKEY = RIGHT;
 	}
 
 	//A
-	if (keyId === LEFT) {
+	if (keyId === LEFT){
 		player.vx += -player.speed;
 		LASTKEY = LEFT;
 	}

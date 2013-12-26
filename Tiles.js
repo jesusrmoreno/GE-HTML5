@@ -9,6 +9,8 @@ function Tile(type) {
 Tile.prototype.setLocation = function(x, y) {
 	this.x = x * TILE_WIDTH;
 	this.y = y * TILE_HEIGHT;
+	this.maxY;
+	this.maxX;
 }
 
 Tile.prototype.draw = function(type) {
