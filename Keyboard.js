@@ -17,13 +17,11 @@ function checkKeyDown(e) {
 
 	//D
 	if (keyId === RIGHT){
-		player.vx += player.speed;
 		LASTKEY = RIGHT;
 	}
 
 	//A
 	if (keyId === LEFT){
-		player.vx += -player.speed;
 		LASTKEY = LEFT;
 	}
 
