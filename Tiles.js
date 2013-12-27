@@ -20,6 +20,5 @@ Tile.prototype.draw = function(type) {
 	}
 }
 
-var pixelToTile = function(p) {
-	return Math.floor(p/TILE_HEIGHT);
-}
+var t2p = function(t) { return t * TILE_WIDTH; }
+var p2t = function(p) { return Math.floor(p/TILE_WIDTH)}

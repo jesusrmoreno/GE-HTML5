@@ -31,6 +31,7 @@ PlayerObj.prototype.draw = function(sprite) {
 	playerCtx.clearRect(0, 0, 400, 400);
 	playerCtx.fillStyle = "#003b6f";
 	playerCtx.fillRect(this.x, this.y, this.width, this.height);
+	playerCtx.fillText(Math.floor(this.x / TILE_WIDTH) + " , " + Math.floor(this.y / TILE_WIDTH) , 120, 64);
 }
 
 //The Update function of our player. eg: The Brains.
@@ -59,19 +60,12 @@ PlayerObj.prototype.physics = function() {
 	this.y = Math.floor(this.y);
 	this.maxY = this.y + this.height;
 
-	if (this.y % TILE_HEIGHT != 0) {
-		this.y -= 1;
-	}
-
-	if ((this.right) && (this.rightBlocked === false)) {
+	if (this.right) {
 		this.dx -= this.dx - ACCEL;
 	}
 
 
-	if ((this.left) && (this.leftBlocked === false)) {
-		if (this.rightBlocked === true) {
-			
-		}
+	if (this.left)  {
 		this.dx -= this.dx + ACCEL;
 	}
 
@@ -79,7 +73,7 @@ PlayerObj.prototype.physics = function() {
 		this.dx -= 1;
 	}
 
-	if (this.dx < 0) {
+	if ((wasleft) && (this.dx < 0)) {
 		this.dx += 1;
 	}
 
@@ -88,73 +82,52 @@ PlayerObj.prototype.physics = function() {
 	this.maxX = this.x + this.width;
 
 	this.falling = true;
-	this.rightBlocked = false;
-	this.leftBlocked = false;
-
-	// var wasleft = this.dx < 0,
-	// 	wasright = this.dx > 0;
-
-	// this.ddx = 0;
-
-
-	// //Keep track of lower right corner
-	// this.maxX = this.x + this.width;
-	// this.maxY = this.y + this.height;
-
-
-	// if (this.left) {
-	// 	this.ddx = this.ddx - ACCEL;
-	// }
-	// else if (wasleft) {
-	// 	this.ddx = this.ddx + FRIX;
-	// }
-	// if (this.right) {
-	// 	this.ddx = this.ddx + ACCEL;
-	// } 
-	// else if (wasright) {
-	// 	this.ddx = this.ddx - FRIX;
-	// }
-
-
-
-	// this.x  = Math.floor(player.x  + player.dx);
-	// this.dx = this.dx + player.ddx;
-	
-	
-
-
-
 }
 
-function checkCollision(a, b) {
+function checkCollision(a, b) {	
+
+	aTw = Math.floor(a.x / TILE_WIDTH);
+	aTy = Math.floor(a.y / TILE_HEIGHT);
+	bTw = Math.floor(b.x / TILE_WIDTH);
+	bTy = Math.floor(b.y / TILE_HEIGHT);
 
 	b.maxX = b.x + TILE_WIDTH;
 	b.maxY = b.y + TILE_HEIGHT; 
 	
 	if (b.type === 1) {
-		if (((a.maxY + 1 > b.y) && (a.y < b.y)) && (a.dy > 0)){
+
+		if (((aTy + 1) === bTy)) {
 			if ((!((a.maxX <= b.x) && (a.x < b.x))) && (!((a.maxX > b.maxX) && (a.x >= b.maxX)))){
+				a.y = Math.floor(aTy) * 16;
 				a.falling = false;
 				a.dy = 0;
 				a.jump = true;
 			}
 		}
 
-		if ((a.y - 1 < b.maxY) && (a.maxY > b.maxY) && (a.dy < 0) && a.jump === false) {
-			if ((!((a.maxX <= b.x) && (a.x < b.x))) && (!((a.maxX > b.maxX) && (a.x >= b.maxX)))){
-				a.falling = true;
-				a.dy = 0;
+
+
+
+		if (a.dx > 0) {
+			if (((aTw + 1) === (bTw)) && ((aTy === bTy))) {
+				a.x = Math.floor(aTw) * 16;
+				a.dx = 0;
+			}
+		} 
+
+		if (a.dx < 0) {
+			if ((aTw === bTw) && ((aTy === bTy))) {
+				a.x = Math.floor(aTw + 1) * 16;		
+				a.dx = 0;
 			}
 		}
 
+		
+		
 
 
 
-		if ((!((a.maxX + 1 <= b.x) && (a.x < b.x)))) {
-			if ((a.maxY >= b.y) && (a.y <= b.y) ) {	
-				//a.rightBlocked = true;
-			}
-		}
+		
 
 
 
