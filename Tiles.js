@@ -19,3 +19,7 @@ Tile.prototype.draw = function(type) {
 		bgCtx.fillRect(this.x, this.y, TILE_WIDTH, TILE_HEIGHT);
 	}
 }
+
+var pixelToTile = function(p) {
+	return Math.floor(p/TILE_HEIGHT);
+}

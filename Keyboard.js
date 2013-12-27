@@ -7,36 +7,30 @@ var UP = 87,
 
 function checkKeyDown(e) {
 	var keyId = e.keyCode || e.which;
-
-	//W
-	if ((keyId === UP) && (player.jumping === false)) {
-		player.falling = true;
-		player.vy += -GRAVITY * 20;
-		player.jumping = true;
+	switch(keyId) {
+		case UP:
+			player.up = true;
+			return false;
+		case RIGHT:
+			player.right = true;
+			return false;
+		case LEFT:
+			player.left = true;
+			return false;
 	}
-
-	//D
-	if (keyId === RIGHT){
-		LASTKEY = RIGHT;
-	}
-
-	//A
-	if (keyId === LEFT){
-		LASTKEY = LEFT;
-	}
-
 }
 
 function checkKeyUp(e) {
 	var keyId = e.keyCode || e.which;
-	//D
-	if (keyId === RIGHT) {
-		player.vx = 0;
+	switch(keyId) {
+		case UP:
+			player.up = false;
+			return false;
+		case RIGHT:
+			player.right = false;
+			return false;
+		case LEFT:
+			player.left = false;
+			return false;
 	}
-
-	//A
-	if (keyId === LEFT) {
-		player.vx = 0;
-	}
-
 }

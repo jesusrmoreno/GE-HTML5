@@ -3,6 +3,14 @@ var wTile = 20,
 	hTile = 20,
 	TILE_WIDTH = 16,
 	TILE_HEIGHT = 16,
+	METER = TILE_HEIGHT,
+	MAXDX = 3,
+	MAXDY = 3,
+	ACCEL = MAXDX ,
+	FRIX  = MAXDX + 1,
+	JUMP = METER * 1500,
+
+
 	gameWidth = wTile * TILE_WIDTH,
 	gameHeight = hTile * TILE_HEIGHT;
 
@@ -27,7 +35,7 @@ function run(images) {
 	document.addEventListener('keydown', checkKeyDown, false);
 	document.addEventListener('keyup', checkKeyUp, false);
 	loadedImages = images;
-	bgCtx.drawImage(loadedImages.bg, 0, 0, gameWidth, gameHeight);
+	bgCtx.drawImage(loadedImages.bg, 0, 0, loadedImages.bg.width / 3, loadedImages.bg.height / 3);
 	startLoop();
 }
 
@@ -48,25 +56,24 @@ var MAP = [
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+			1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0,
 			]
 
 //Actual game code
 var GRAVITY = .2,
 	LASTKEY;
 
-var player = new PlayerObj(32, gameWidth - 64, 16, 16);
+var player = new PlayerObj(32, 0, 16, 16);
 
 //This loops! 
 //Any code in here will be run over and over again.
 function main() {
 	player.update();
-
 	for (var i = 0; i < MAP.length; i++) {
 		var tile = new Tile(MAP[i]);
 		var x = i % wTile;
@@ -75,8 +82,9 @@ function main() {
 		tile.draw();
 		checkCollision(player, tile);
 	}
-
 }
+
+
 
 loadResources(IMAGES, run);
 
