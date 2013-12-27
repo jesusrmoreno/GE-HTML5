@@ -9,21 +9,19 @@ function checkKeyDown(e) {
 	var keyId = e.keyCode || e.which;
 
 	//W
-	if (keyId === UP) {
-		if (player.YCOLLISION === true) {
-			player.vy -= GRAVITY * 2;
-		}
+	if ((keyId === UP) && (player.jumping === false)) {
+		player.falling = true;
+		player.vy += -GRAVITY * 20;
+		player.jumping = true;
 	}
 
 	//D
 	if (keyId === RIGHT){
-		player.shouldMove = true;
 		LASTKEY = RIGHT;
 	}
 
 	//A
 	if (keyId === LEFT){
-		player.shouldMove = true;
 		LASTKEY = LEFT;
 	}
 
@@ -31,19 +29,14 @@ function checkKeyDown(e) {
 
 function checkKeyUp(e) {
 	var keyId = e.keyCode || e.which;
-	
-	if (keyId === UP) {
-
-	}
-
 	//D
 	if (keyId === RIGHT) {
-		;
+		player.vx = 0;
 	}
 
 	//A
 	if (keyId === LEFT) {
-		;
+		player.vx = 0;
 	}
 
 }

@@ -24,7 +24,6 @@ var playerCanvas = document.getElementById('playerCanvas'),
 //Use to add listeners and to draw the background
 
 function run(images) {
-	player = new PlayerObj(32, 120, 16, 16);
 	document.addEventListener('keydown', checkKeyDown, false);
 	document.addEventListener('keyup', checkKeyUp, false);
 	loadedImages = images;
@@ -53,7 +52,7 @@ var MAP = [
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			]
 
@@ -61,12 +60,12 @@ var MAP = [
 var GRAVITY = .2,
 	LASTKEY;
 
-
+var player = new PlayerObj(32, gameWidth - 64, 16, 16);
 
 //This loops! 
 //Any code in here will be run over and over again.
 function main() {
-	
+	player.update();
 
 	for (var i = 0; i < MAP.length; i++) {
 		var tile = new Tile(MAP[i]);
@@ -74,13 +73,8 @@ function main() {
 		var y = Math.floor(i / wTile);
 		tile.setLocation(x, y);
 		tile.draw();
-		checkVertCollision(player, tile);
-
-		checkHorCollision(player, tile);
-
+		checkCollision(player, tile);
 	}
-
-	player.update();
 
 }
 
